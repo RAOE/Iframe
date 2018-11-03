@@ -7,15 +7,12 @@
 <p>com.xyf.mvc.service  服务层</p>
 <p>com.xyf.mvc.serviceimp  服务实现层</p>
 <p>com.xyf.mvc.servlet    核心层，对servlet进行封装  初始化顺序依次为</br>
-        
-  <code>
-        public void init(ServletConfig config) { <font></font>
-		// scan扫描 包                                    <font></font>
-		doScan("com.xyf");// 扫描这个包下面的所有类<font></font>
-		doInstance();// 创建实例并保存<font></font>
-		doAutowired();// 射入<font></font>
-		doMapping();// 根据映射找到方法 --> 找到method<font></font>
-  </code>
+        <p>public void init(ServletConfig config) { </p>
+		<p>// scan扫描 包                               </p>
+		<p>doScan("com.xyf");// 扫描这个包下面的所有类</p>
+		<p>doInstance();// 创建实例并保存</p>
+		<p>doAutowired();// 射入</p>
+		<p>doMapping();// 根据映射找到方法 --> 找到method</p>
             
 <h1>如何使用</h1>
 <p>参考 类com.xyf.mvc.controller.testController</p>
