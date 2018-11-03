@@ -9,12 +9,12 @@
 <p>com.xyf.mvc.servlet    核心层，对servlet进行封装  初始化顺序依次为</br>
         
   <code>
-        public void init(ServletConfig config) { <br/>
-		// scan扫描 包                                            <br/>
-		doScan("com.xyf");// 扫描这个包下面的所有类<br/>
-		doInstance();// 创建实例并保存<br/>
-		doAutowired();// 射入<br/>
-		doMapping();// 根据映射找到方法 --> 找到method<br/>
+        public void init(ServletConfig config) { <font></font>
+		// scan扫描 包                                    <font></font>
+		doScan("com.xyf");// 扫描这个包下面的所有类<font></font>
+		doInstance();// 创建实例并保存<font></font>
+		doAutowired();// 射入<font></font>
+		doMapping();// 根据映射找到方法 --> 找到method<font></font>
   </code>
             
 <h1>如何使用</h1>
