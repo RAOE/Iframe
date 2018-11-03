@@ -1,5 +1,5 @@
 # MySpringMvCFrame
-参考SpringMVC框架, 实现轻量级的web框架
+参考SpringMVC框架, 实现轻量级的web框架，可用作小型网站的搭建，对servle进行很好的封装。
 
 <h1>目录介绍</h1>
 <p>com.xyf.mvc.annotation 注解类 springmvc 的注解 如requestMapping requstParam 都在这里</p>
