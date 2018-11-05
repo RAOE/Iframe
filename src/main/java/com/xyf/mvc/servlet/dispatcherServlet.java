@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
 import com.xyf.mvc.annotation.Autowired;
 import com.xyf.mvc.annotation.RequestMapping;
 import com.xyf.mvc.annotation.RequestParam;
@@ -35,7 +40,9 @@ public class dispatcherServlet extends HttpServlet {
 	List<String> classNames = new ArrayList<String>();
 	Map<String, Object> map = new HashMap<String, Object>();
 	Map<String, Object> handerMap = new HashMap<String, Object>();
-
+    
+	private String scan_packageName="";
+    
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -47,12 +54,33 @@ public class dispatcherServlet extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) {
-		// scan扫描 包
-		doScan("com.xyf");// 扫描这个包下面的所有类
+		
+		doScanXml();
+		doScan(scan_packageName);// 扫描这个包下面的所有类
 		doInstance();// 创建实例并保存
 		doAutowired();// 射入
 		doMapping();// 根据映射找到方法 --> 找到method
 
+	}
+
+	private void doScanXml() {
+		//通过xml文件获得需要扫描的包名
+		URL url=this.getClass().getClassLoader().getResource("config.xml");
+		File file =new File(url.getFile());
+		SAXReader reader=new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+		Element root=document.getRootElement();
+		List<?> list=root.elements();
+		for(Object object:list)
+		{
+			Element element = (Element)object;
+			scan_packageName=element.getText(); 
+		}		
 	}
 
 	private void doScan(String basePackage) {
@@ -102,10 +130,8 @@ public class dispatcherServlet extends HttpServlet {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -192,7 +218,7 @@ public class dispatcherServlet extends HttpServlet {
 		String context = request.getContextPath();
 		String path = uri.replace(context, ""); // key
 		Method method = (Method) handerMap.get(path); // method --
-		if (!path.equals("/")) {
+		if (!path.equals("/")&&method!=null) {
 			testController instance = (testController) map.get("/" + path.split("/")[1]);
 			Object args[] = han(request, response, method);
 

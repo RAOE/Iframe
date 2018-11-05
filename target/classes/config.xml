@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- 定义启动时扫描的包的名称 -->
+    <scan-package>com.xyf</scan-package>
+    
+    
+    
+    
+    
+</config>
