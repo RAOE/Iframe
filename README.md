@@ -1,4 +1,4 @@
-# MySpringMvCFrame
+#Iframe
 模仿SpringMVC框架, 并实现轻量级的web框架，可用作小型网站的搭建，对servle进行封装。
 
 <h1>目录介绍</h1>
